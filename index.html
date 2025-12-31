@@ -1,172 +1,174 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2026</title>
+    <title>2026 Dashboard | Goals & Countdown</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; overflow: hidden; margin: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; overflow-x: hidden; margin: 0; color: white; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .gradient-text { background: linear-gradient(to bottom right, #fff, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .progress-glow { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
-        .btn-hover:hover { transform: translateY(-2px); transition: all 0.3s ease; box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.5); }
+        .gradient-text { background: linear-gradient(to bottom right, #ffffff, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="text-white flex items-center justify-center min-h-screen">
+<body class="min-h-screen flex items-center justify-center p-6">
 
-    <canvas id="fireworks" class="absolute inset-0 z-0"></canvas>
+    <canvas id="fireworks" class="fixed inset-0 z-0"></canvas>
 
-    <div class="fixed top-6 right-6 z-50">
-        <button id="musicToggle" class="glass p-3 rounded-full btn-hover">
-            <span id="musicIcon">🔇</span>
-        </button>
-        <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-    </div>
-
-    <main class="z-10 text-center px-4 w-full max-w-2xl">
-        <div class="glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
-            <h2 id="greeting" class="text-lg md:text-xl font-medium tracking-widest uppercase mb-4 opacity-70">
-                Welcome to the Future
-            </h2>
+    <main class="z-10 w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <section class="glass p-8 rounded-[2.5rem] flex flex-col justify-center text-center">
+            <h2 id="greeting" class="text-sm tracking-[0.3em] uppercase opacity-50 mb-4">Hello 2026</h2>
+            <h1 class="text-8xl font-black mb-6 gradient-text tracking-tighter">2026</h1>
             
-            <h1 class="text-7xl md:text-9xl font-extrabold mb-8 gradient-text tracking-tighter">2026</h1>
-            
-            <div class="grid grid-cols-4 gap-4 md:gap-8 mb-10">
-                <div class="flex flex-col">
-                    <span id="days" class="text-3xl md:text-5xl font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest mt-2 opacity-40">Days</span>
-                </div>
-                <div class="flex flex-col">
-                    <span id="hours" class="text-3xl md:text-5xl font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest mt-2 opacity-40">Hours</span>
-                </div>
-                <div class="flex flex-col">
-                    <span id="minutes" class="text-3xl md:text-5xl font-bold">00</span>
-                    <span class="text-[10px] uppercase tracking-widest mt-2 opacity-40">Mins</span>
-                </div>
-                <div class="flex flex-col">
-                    <span id="seconds" class="text-3xl md:text-5xl font-bold text-blue-500">00</span>
-                    <span class="text-[10px] uppercase tracking-widest mt-2 opacity-40">Secs</span>
-                </div>
+            <div class="grid grid-cols-4 gap-2 mb-8">
+                <div><p id="days" class="text-2xl font-bold">00</p><p class="text-[8px] uppercase opacity-40">Days</p></div>
+                <div><p id="hours" class="text-2xl font-bold">00</p><p class="text-[8px] uppercase opacity-40">Hrs</p></div>
+                <div><p id="minutes" class="text-2xl font-bold">00</p><p class="text-[8px] uppercase opacity-40">Min</p></div>
+                <div><p id="seconds" class="text-2xl font-bold text-blue-400">00</p><p class="text-[8px] uppercase opacity-40">Sec</p></div>
             </div>
 
-            <div class="mb-10 px-4">
+            <div class="text-left mb-6">
                 <div class="flex justify-between text-[10px] uppercase tracking-widest mb-2 opacity-50">
-                    <span>2026 Progress</span>
+                    <span>Year Progress</span>
                     <span id="progressPercent">0%</span>
                 </div>
-                <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                    <div id="progressBar" class="bg-blue-500 h-full progress-glow transition-all duration-1000" style="width: 0%"></div>
+                <div class="w-full bg-white/10 rounded-full h-1">
+                    <div id="progressBar" class="bg-blue-500 h-full transition-all duration-1000" style="width: 0%"></div>
                 </div>
             </div>
-
-            <button onclick="changeMessage()" class="glass px-8 py-3 rounded-full text-sm font-semibold btn-hover border border-blue-500/30">
-                Click for a Wish ✨
+            
+            <button onclick="changeMessage()" class="text-[10px] font-bold tracking-widest uppercase opacity-40 hover:opacity-100 transition-opacity">
+                Generate Inspiration ✨
             </button>
-        </div>
+        </section>
+
+        <section class="glass p-8 rounded-[2.5rem] flex flex-col h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">Resolutions</h3>
+                <span id="resCount" class="text-[10px] glass px-3 py-1 rounded-full opacity-60">0 Goals</span>
+            </div>
+
+            <div class="flex gap-2 mb-6">
+                <input type="text" id="resInput" placeholder="Enter a goal..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                <button onclick="addResolution()" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-xl text-sm font-bold transition-colors">+</button>
+            </div>
+
+            <div id="resList" class="flex-1 overflow-y-auto space-y-3 pr-2">
+                </div>
+        </section>
+
     </main>
 
     <script>
-        // --- MUSIC LOGIC ---
-        const musicBtn = document.getElementById('musicToggle');
-        const audio = document.getElementById('bgMusic');
-        const icon = document.getElementById('musicIcon');
+        // --- RESOLUTIONS LOGIC ---
+        let resolutions = JSON.parse(localStorage.getItem('res2026')) || [];
 
-        musicBtn.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); icon.innerText = '🔊'; } 
-            else { audio.pause(); icon.innerText = '🔇'; }
-        });
+        function renderResolutions() {
+            const list = document.getElementById('resList');
+            list.innerHTML = '';
+            resolutions.forEach((res, index) => {
+                const div = document.createElement('div');
+                div.className = "glass p-3 rounded-xl flex justify-between items-center text-sm animate-fade-in";
+                div.innerHTML = `
+                    <span class="opacity-80">${res}</span>
+                    <button onclick="deleteRes(${index})" class="text-red-400 hover:text-red-300 ml-2">×</button>
+                `;
+                list.appendChild(div);
+            });
+            document.getElementById('resCount').innerText = `${resolutions.length} Goals`;
+            localStorage.setItem('res2026', JSON.stringify(resolutions));
+        }
 
-        // --- PROGRESS BAR LOGIC ---
-        function updateYearProgress() {
+        function addResolution() {
+            const input = document.getElementById('resInput');
+            if (input.value.trim()) {
+                resolutions.push(input.value.trim());
+                input.value = '';
+                renderResolutions();
+                createFirework(window.innerWidth * 0.75, window.innerHeight / 2);
+            }
+        }
+
+        function deleteRes(index) {
+            resolutions.splice(index, 1);
+            renderResolutions();
+        }
+
+        // --- COUNTDOWN & PROGRESS ---
+        function updateUI() {
             const now = new Date();
+            const target = new Date('January 1, 2027 00:00:00').getTime();
+            const gap = target - now.getTime();
+
+            // Progress
             const start = new Date(now.getFullYear(), 0, 1);
             const end = new Date(now.getFullYear() + 1, 0, 1);
             const progress = (now - start) / (end - start) * 100;
-            
             document.getElementById('progressBar').style.width = progress + '%';
             document.getElementById('progressPercent').innerText = progress.toFixed(4) + '%';
-        }
 
-        // --- COUNTDOWN LOGIC ---
-        const targetDate = new Date('January 1, 2027 00:00:00').getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const gap = targetDate - now;
-
-            const d = Math.floor(gap / (1000 * 60 * 60 * 24));
-            const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((gap % (1000 * 60)) / 1000);
+            // Timer
+            const d = Math.max(0, Math.floor(gap / (1000 * 60 * 60 * 24)));
+            const h = Math.max(0, Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            const m = Math.max(0, Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)));
+            const s = Math.max(0, Math.floor((gap % (1000 * 60)) / 1000));
 
             document.getElementById('days').innerText = d.toString().padStart(2, '0');
             document.getElementById('hours').innerText = h.toString().padStart(2, '0');
             document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
             document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
-            
-            updateYearProgress();
-        }
-        setInterval(updateCountdown, 1000);
-
-        // --- GREETINGS & FIREWORKS ---
-        const messages = [
-            "Today is the first blank page of a 365-page book!",
-            "2026 is your year to shine! ✨",
-            "May your bugs be few and your coffee be strong!",
-            "Happy New Year! Let's build something great."
-        ];
-        function changeMessage() {
-            const greet = document.getElementById('greeting');
-            greet.innerText = messages[Math.floor(Math.random() * messages.length)];
-            createFirework(window.innerWidth / 2, window.innerHeight / 2);
         }
 
-        // Fireworks Engine
+        // --- FIREWORKS ---
         const canvas = document.getElementById('fireworks');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        resize();
+        window.addEventListener('resize', resize); resize();
 
         class Particle {
             constructor(x, y, color) {
                 this.x = x; this.y = y; this.color = color;
-                this.velocity = { x: (Math.random() - 0.5) * 10, y: (Math.random() - 0.5) * 10 };
-                this.alpha = 1; this.friction = 0.96;
+                this.velocity = { x: (Math.random() - 0.5) * 8, y: (Math.random() - 0.5) * 8 };
+                this.alpha = 1; this.friction = 0.95;
             }
-            draw() {
-                ctx.globalAlpha = this.alpha;
-                ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
-                ctx.fillStyle = this.color; ctx.fill();
-            }
-            update() {
-                this.velocity.x *= this.friction; this.velocity.y *= this.friction;
-                this.x += this.velocity.x; this.y += this.velocity.y;
-                this.alpha -= 0.012;
-            }
+            update() { this.velocity.x *= this.friction; this.velocity.y *= this.friction; this.x += this.velocity.x; this.y += this.velocity.y; this.alpha -= 0.015; }
+            draw() { ctx.globalAlpha = this.alpha; ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
         }
 
         function createFirework(x, y) {
             const color = `hsl(${Math.random() * 360}, 70%, 60%)`;
-            for (let i = 0; i < 40; i++) particles.push(new Particle(x, y, color));
+            for (let i = 0; i < 30; i++) particles.push(new Particle(x, y, color));
         }
 
         function animate() {
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.15)';
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
-                if (p.alpha > 0) { p.update(); p.draw(); }
-                else { particles.splice(i, 1); }
-            });
-            if (Math.random() < 0.04) createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
+            particles.forEach((p, i) => { if (p.alpha > 0) { p.update(); p.draw(); } else { particles.splice(i, 1); } });
+            if (Math.random() < 0.02) createFirework(Math.random() * canvas.width, Math.random() * canvas.height);
             requestAnimationFrame(animate);
         }
+
+        function changeMessage() {
+            const quotes = ["Vision is the art of seeing things invisible.", "Dream big. Start small.", "2026: Year of Growth."];
+            document.getElementById('greeting').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+            createFirework(window.innerWidth / 4, window.innerHeight / 2);
+        }
+
+        // Init
+        renderResolutions();
+        setInterval(updateUI, 1000);
         animate();
+
+        // Allow Enter key for resolutions
+        document.getElementById('resInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addResolution();
+        });
     </script>
 </body>
 </html>
